@@ -24,7 +24,7 @@ jobs:
         run:
           python -m pip install pipenv 
           pipenv shell
-          pipenv sync
+          pipenv update
       
       
       - name: Run formatters
