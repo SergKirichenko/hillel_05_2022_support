@@ -21,7 +21,8 @@ jobs:
           cache: 'pipenv'
       
       - name: Install deps
-        run: pipenv sync
+        run:
+          pipenv update
       
       - name: Run linter
         run: flake8 ./
