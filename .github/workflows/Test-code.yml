@@ -22,7 +22,7 @@ jobs:
       
       - name: Install deps
         run:
-          pip install pipenv
+          pipenv shell
           pipenv update
       
       - name: Run linter
