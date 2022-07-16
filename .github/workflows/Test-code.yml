@@ -26,9 +26,9 @@ jobs:
           pipenv shell
           pipenv sync
       
-      - name: Run linter
-        run: flake8 ./
       
       - name: Run formatters
         run: black --check ./ && isort --check-only ./
 
+      - name: Run linter
+        run: flake8 ./
