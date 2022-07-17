@@ -21,10 +21,9 @@ jobs:
           cache: 'pipenv'
       
       - name: Install deps
-        run:
-          python -m pip install pipenv 
-          pipenv shell
-          pipenv update
+        uses: VaultVulp/action-pipenv@v2022.7.4
+        with:
+          command: install -d
       
       
       - name: Run formatters
