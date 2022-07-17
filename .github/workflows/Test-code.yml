@@ -23,8 +23,6 @@ jobs:
       - name: Install deps
         run:
           python -m pip install pipenv
-          pipenv shell
-          pipenv requirements --dev > requirements.txt
           pipenv install -r requirements.txt
       
       
