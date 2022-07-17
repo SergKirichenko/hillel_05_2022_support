@@ -9,6 +9,7 @@ black = "*"
 flake8 = "*"
 isort = "==5.10.1"
 pre-commit = "*"
+requests = "*"
 
 [dev-packages]
 
