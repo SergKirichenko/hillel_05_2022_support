@@ -1,6 +1,7 @@
 # Editors
 .vscode/
 .env
+.idea
 
 #Python stuff
 __pycache__/
