@@ -32,12 +32,10 @@ jobs:
       - name: Install dependencies
         if: steps.cache-pipenv.outputs.cache-hit != 'true'
         run: |
-          pipenv install --deploy --dev
-          pipenv sync
-          
+          pipenv install --dev
+                    
       - name: Run linter
         run: |
-          pipenv shell
           pipenv run flake8 ./
       - name: Run formatting check
         run: |
