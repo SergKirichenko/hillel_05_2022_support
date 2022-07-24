@@ -34,8 +34,8 @@ jobs:
         run: |
           pipenv install --deploy --dev
           pipenv sync
+          pipenv shell
           
-
       - name: Run linter
         run: |
           pipenv run flake8 ./
