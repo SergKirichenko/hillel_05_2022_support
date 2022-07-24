@@ -5,12 +5,12 @@ name = "pypi"
 
 [packages]
 django = "==4.0.6"
-requests = "*"
+requests = "==2.28.1"
 django-dotenv = "*"
 
 [dev-packages]
-black = "*"
-flake8 = "*"
+black = "==22.6.0"
+flake8 = "==4.0.1"
 isort = "==5.10.1"
 pre-commit = "*"
 
