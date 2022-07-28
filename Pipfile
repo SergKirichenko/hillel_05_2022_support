@@ -13,6 +13,7 @@ black = "==22.6.0"
 flake8 = "==4.0.1"
 isort = "==5.10.1"
 pre-commit = "*"
+django-stubs = "==1.12.0"
 
 [requires]
 python_version = "3.8"
