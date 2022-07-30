@@ -67,8 +67,11 @@ class ExchangeRatesHistory:
     def add(cls, instance: ExchangeRate) -> None:
         """We would like to add ExchangeRates instances if it is not last duplicated"""
 
-        cls._last_exchange_data = instance
-        if cls._last_exchange_data != instance:
+        if not cls._last_exchange_data:
+            cls._last_exchange_data = instance
+            cls.update_file()
+        elif cls._last_exchange_data != instance:
+            cls._last_exchange_data = instance
             cls.update_file()
 
 
