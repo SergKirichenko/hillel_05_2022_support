@@ -20,7 +20,7 @@ $pip instal pipenv
 - Have the panel of administration  with database of users. Can sign up, sign in/out. 
 Also in app can assign to role of user. 
 
-####Core
+#### Core
 - Tickets - can work with tickets of users requests. App have a database of a tickets.
 - Comments  - can work with comments of users. App have a database of comments to the tickets.
 - Exchange Rate - app can doing request for updating of currency rate and make to respose in json format. 
