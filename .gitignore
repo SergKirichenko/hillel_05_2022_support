@@ -9,4 +9,7 @@ __pycache__/
 #Sqlite
 *.sqlite3
 
+#other
+.reqveum
+
 
