@@ -3,13 +3,13 @@
 
 [![Builds Status](https://github.com/SergKirichenko/hillel_05_2022_support/actions/workflows/Test-code.yml/badge.svg?)](https://github.com/SergKirichenko/hillel_05_2022support/actions/workflows/Test-code.yml) [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/SergKirichenko/hillel_05_2022_support/blob/main/.pre-commit-config.yaml)
 
-#Project: Support service
+# Project: Support service
 
 Online support service for users. Helps to organize quick and comfortable connection 
 specialists of service with users issues.
 
 ## Setup the Environment
-####Install pipenv
+#### Install pipenv
 
 ```
 $pip instal pipenv
