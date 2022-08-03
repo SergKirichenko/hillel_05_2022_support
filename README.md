@@ -26,14 +26,19 @@ $ pipenv install   # installs all packages from Pipfile.
 ```
 ___
 ## Description 
+#### Config 
+- In folder lie files of configuration our project
+  - settings - contains all project settings
+  - urls - sets associations of url-addresses with views
 #### Authentication
 - Have the panel of administration  with database of users. Can sign up, sign in/out. 
 Also in app can assign to role of user. 
   - migrations/ - Has a files with descriptions all fields of database model of admin panel
   - admin.py - the admin panel itself
   - models.py - the model for working with database 
+  - asgi - entry point for ASGI-compatible web servers serving the project (required for deployment to a public site)
+  - wsgi - used to establish communication between a Django application and a web server. We use it like an utility
   
-
 #### Core
 - Tickets - can work with tickets of users requests. App have a database of a tickets.
 - Comments  - can work with comments of users. App have a database of comments to the tickets.
