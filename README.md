@@ -40,7 +40,7 @@ App can save information in history file and make output respose in json format 
 #### Shared
 - A special utility makes temporary marks when adding or changing data in the database 
 
-#### Others files
+#### Other files
 - __history.json__ - Keep in history of exchange rate. 
 - __manage.py__ - script for managing our project, created by the django-admin command. used to build applications, work with databases, and to run or debug-run the server.
 - *.flake8* - Flake8 config file
