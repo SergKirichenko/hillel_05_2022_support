@@ -2,7 +2,7 @@
 
 [![Builds Status](https://github.com/SergKirichenko/hillel_05_2022_support/actions/workflows/Test-code.yml/badge.svg?)](https://github.com/SergKirichenko/hillel_05_2022support/actions/workflows/Test-code.yml) [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/SergKirichenko/hillel_05_2022_support/blob/main/.pre-commit-config.yaml)
 
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pw?label=python%20) 
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pw?label=Python%20)![PyPI](https://img.shields.io/pypi/v/django?color=919&label=Django)
 ___
 
 # Project: Support service
@@ -34,7 +34,7 @@ ___
 - Have the panel of administration  with database of users. Can sign up, sign in/out. 
 Also in app can assign to role of user. 
   - migrations/ - Has a files with descriptions all fields of database model of admin panel
-  - admin.py - the admin panel itself
+  - admin.py - the admin panel itself. (registr models in admin panel)
   - models.py - the model for working with database 
   - asgi - entry point for ASGI-compatible web servers serving the project (required for deployment to a public site)
   - wsgi - used to establish communication between a Django application and a web server. We use it like an utility
@@ -46,7 +46,7 @@ Also in app can assign to role of user.
 App can save information in history file and make output respose in json format from request.
 
 #### Shared
-- A special utility makes temporary marks when adding or changing data in the database 
+- A special utility makes a fields with time marks when adding or changing data in the database 
 
 #### Other files
 - __history.json__ - Keep in history of exchange rate. 

@@ -5,6 +5,11 @@ from django.db import models
 
 from shared.django import TimeStampMixin
 
+DEFAULT_ROLES = {
+    "admin": 1,
+    "user": 2,
+}
+
 
 class CustomUserManager(UserManager):
     """Custom user manager."""
@@ -36,6 +41,9 @@ class Role(TimeStampMixin):
 
     name = models.CharField(max_length=50)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class User(AbstractBaseUser, PermissionsMixin, TimeStampMixin):
     """This is my custom user model."""
@@ -51,7 +59,13 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampMixin):
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
 
-    # role = models.ForeignKey(null=True, default=)
+    role = models.ForeignKey(
+        "Role",
+        null=True,
+        default=DEFAULT_ROLES["user"],
+        on_delete=models.SET_NULL,
+        related_name="users",
+    )
 
     created_at = models.DateTimeField(auto_now_add=True)
     updateed_at = models.DateTimeField(auto_now=True)

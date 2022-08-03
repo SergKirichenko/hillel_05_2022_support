@@ -1,3 +1,15 @@
-# from django.contrib import admin
+from django.contrib import admin
 
-# Register your models here.
+from .models import Comment, Ticket
+
+# @admin.site.register(User)
+
+
+@admin.register(Ticket)
+class TicketAdmin(admin.ModelAdmin):
+    list_display = ["id", "operator", "client", "theme"]
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = ["id", "ticket"]
