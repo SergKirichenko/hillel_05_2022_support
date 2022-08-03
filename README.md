@@ -1,6 +1,8 @@
 # hillel_05_2022_support
 
 [![Builds Status](https://github.com/SergKirichenko/hillel_05_2022_support/actions/workflows/Test-code.yml/badge.svg?)](https://github.com/SergKirichenko/hillel_05_2022support/actions/workflows/Test-code.yml) [![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/SergKirichenko/hillel_05_2022_support/blob/main/.pre-commit-config.yaml)
+
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/pw?label=python%20) 
 ___
 
 # Project: Support service
@@ -8,8 +10,9 @@ ___
 Online support service for users. Helps to organize quick and comfortable connection 
 specialists of service with users issues.
 ___
-## Setup Environment
+## Setup Environment  
 #### 1)  Install pipenv
+
 - About [pipenv](https://pypi.org/project/pipenv/)
 
 ```
@@ -20,7 +23,7 @@ $ pipenv shell   # activate vitual environment
 '''All of dependencies wrote in Pipfile'''
 ```
 $ pipenv install   # installs all packages from Pipfile.
-``` 
+```
 ___
 ## Description 
 #### Authentication
