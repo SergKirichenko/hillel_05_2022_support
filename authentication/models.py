@@ -28,12 +28,15 @@ class CustomUserManager(UserManager):
         return user
 
     def create_superuser(self, email: str, username: Optional[str] = None, password: Optional[str] = None, **kwargs):
+        _payload = kwargs
         superuser_payload: dict = {
             "is_superuser": True,
             "is_active": True,
             "is_staff": True,
+            "role_id": DEFAULT_ROLES["admin"],
         }
-        return self.create_user(email, username, password, **superuser_payload)
+        _payload.update(superuser_payload)
+        return self.create_user(email, username, password, **_payload)
 
 
 class Role(TimeStampMixin):

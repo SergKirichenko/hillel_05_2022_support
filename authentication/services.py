@@ -6,7 +6,7 @@ User = get_user_model()
 
 def create_dev_user(*args, **kwargs):
     if settings.DEBUG:
-        payload = {
+        payload: dict = {
             "email": "admin@admin.com",
             "username": "admin",
             "password": "admin",

@@ -1,7 +1,7 @@
 from django.db import migrations
 
 
-def autopopulate_roles(apps):   # , schema_editor
+def autopopulate_roles(apps, schema_editor):  #
     Role = apps.get_model("authentication", "Role")
     roles = [Role(name="admin"), Role(name="user")]
     for role in roles:
@@ -9,7 +9,6 @@ def autopopulate_roles(apps):   # , schema_editor
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('authentication', '0001_initial'),
     ]
