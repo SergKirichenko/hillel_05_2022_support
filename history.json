@@ -19,6 +19,21 @@
       "from_": "BTC",
       "to": "USD",
       "value": "24347.790"
+    },
+    {
+      "from_": "BTC",
+      "to": "USD",
+      "value": "23215.440"
+    },
+    {
+      "from_": "BTC",
+      "to": "USD",
+      "value": "23208.610"
+    },
+    {
+      "from_": "BTC",
+      "to": "USD",
+      "value": "23225.000"
     }
   ]
 }

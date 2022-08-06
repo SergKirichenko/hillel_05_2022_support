@@ -8,7 +8,7 @@ from typing import Dict, List
 import requests
 from django.http import JsonResponse
 
-PATH_TO_HISTORY_FILE = os.path.join("history.json")
+PATH_TO_HISTORY_FILE = os.path.join("./history.json")
 
 
 def home(request):
