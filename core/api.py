@@ -1,7 +1,7 @@
 from django.core.exceptions import PermissionDenied
 from django.db.models import Q
 from rest_framework import status
-from rest_framework.decorators import action
+from rest_framework.exceptions import ValidationError
 from rest_framework.generics import (
     ListCreateAPIView,
     RetrieveAPIView,
@@ -26,13 +26,18 @@ class TicketsListCreateAPI(ListCreateAPIView):
     permission = ClientOnly
 
     def get_queryset(self):
+        """Filtering tickets according params"""
         user = self.request.user
+        params = self.request.query_params["empty"]
         if user.role.id == DEFAULT_ROLES["admin"]:
-            return Ticket.objects.filter(Q(operator=None) | Q(operator=user))
+            if params == "True":
+                return Ticket.objects.filter(operator=None)
+            elif params == "False":
+                return Ticket.objects.filter(Q(operator=None) | Q(operator=user))
+            raise ValidationError
+        if user.role.id == DEFAULT_ROLES["user"]:
+            return Ticket.objects.filter(client=user)
 
-        return Ticket.objects.filter(client=user)
-
-    @action(methods="GET", detail=False)
     def list(self, request, *args, **kwargs):
         #    Get all user Ticket:
         #     - If User = Role - user, he get his own tickets;
@@ -42,7 +47,6 @@ class TicketsListCreateAPI(ListCreateAPIView):
         serializer = TicketLightSerializer(queryset, many=True)
         return Response(serializer.data)
 
-    @action(methods="POST", detail=False)
     def create(self, request, *args, **kwargs):
         #  User - Role = admin can't create the ticket
 
@@ -50,8 +54,7 @@ class TicketsListCreateAPI(ListCreateAPIView):
             serializer = self.get_serializer(data=request.data)
             serializer.is_valid(raise_exception=True)
             serializer.save()
-            headers = self.get_success_headers(serializer.data)
-            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
         raise PermissionDenied
 
 
@@ -84,6 +87,7 @@ class TicketAssignAPI(UpdateAPIView):
 
 # '''Update - PUT, PATCH'''
 class TicketsUpdateAPI(UpdateAPIView):
+    """only client can update own tickets,  two fields (theme, discription)"""
 
     serializer_class = TicketUpdateSerializer
     permission_classes = [ClientOnly]
@@ -97,7 +101,7 @@ class TicketsUpdateAPI(UpdateAPIView):
 
 # '''DELETE'''
 class TicketsDeleteAPI(RetrieveDestroyAPIView):
-    # Allow delete on specific procedure
+    # Allow delete on specific procedure (description in permissions.py)
     serializer_class = TicketSerializer
     permission_classes = [PermissionTicketDelete]
     lookup_field = "id"
