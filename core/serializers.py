@@ -1,6 +1,7 @@
 from itertools import chain
 
 from django.contrib.auth import get_user_model
+from django.core.exceptions import ValidationError
 from rest_framework import serializers
 
 from authentication.models import Role
@@ -49,15 +50,13 @@ class TicketSerializer(serializers.ModelSerializer):
         theme = attrs.get("theme")
         if not theme:
             return attrs
-            # try:
-            #     Ticket.objects.get(theme=theme)
-            # except Ticket.DoesNotExist:
-            #     return attrs
-            # data = Ticket.objects.only("theme")
-        data = Ticket.objects.values("theme")
+
+        data = Ticket.objects.values_list("theme")
         for element in chain.from_iterable(data):
             if element == theme:
-                raise ValueError("This ticket is already in database")
+                raise ValidationError("This ticket is already in database")
+
+        attrs["client"] = self.context["request"].user
         return attrs
 
 
@@ -66,6 +65,43 @@ class TicketLightSerializer(serializers.ModelSerializer):
         model = Ticket
         fields = ["id", "theme", "resolved", "operator", "client"]
 
+
+class TicketAssignSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = ["operator"]
+
+    def validate(self, attrs: dict) -> dict:
+        # NOTE: Add current user to the `attrs` object
+        attrs["operator"] = self.context["request"].user
+        return attrs
+
+
+class TicketUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Ticket
+        fields = ["theme", "description", "updated_at"]
+
+
+##################################################################
+# Пример кастомного валидатора
+# Двоной ## решеткой обозначены места дополнительных вариантов выполнения некоторых строк (2-3 вариата)
+# def validate(self, attrs: dict) -> dict:
+#         theme = attrs.get("theme")
+#         if not theme:
+#             return attrs
+#             # try:
+#             #     Ticket.objects.get(theme=theme)
+#             # except Ticket.DoesNotExist:
+#             #     return attrs
+#             # data = Ticket.objects.only("theme")
+#         data = Ticket.objects.values_list("theme")
+#         for element in chain.from_iterable(data):
+#             if element == theme:
+#                 raise ValidationError("This ticket is already in database")
+
+#         attrs["client"] = self.context["request"].user
+#         return attrs
 
 #  ############################################################################################
 # class TicketUpdateSerializer(serializers.ModelSerializer):

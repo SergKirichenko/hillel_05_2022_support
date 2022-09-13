@@ -5,6 +5,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("auth/", include("djoser.urls")),
     path("auth/", include("djoser.urls.jwt")),
+    path("auth/", include("authentication.urls")),
     path("tickets/", include("core.urls")),
     path("exchange_rates/", include("exchange_rates.urls")),
 ]

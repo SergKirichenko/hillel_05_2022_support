@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -16,12 +17,14 @@ DJANGO_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.sites",
 ]
 
 THIRD_PARTY_APPS = [
     "django_extensions",
     "rest_framework",
     "rest_framework.authtoken",
+    "djoser",
 ]
 
 LOCAL_APPS = [
@@ -29,6 +32,8 @@ LOCAL_APPS = [
     "exchange_rates",
     "authentication",
 ]
+
+SITE_ID = 1
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
@@ -89,6 +94,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
     },
+    # {
+    #     "NAME": "config.validators.MyCustomPasswordValidator",
+    # },
 ]
 
 AUTH_USER_MODEL = "authentication.User"
@@ -117,7 +125,47 @@ REST_FRAMEWORK = {
         "rest_framework.permissions.IsAuthenticated",
     ],
     "DEFAULT_AUTHENTICATION_CLASSES": [
-        "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
+        # "rest_framework.authentication.SessionAuthentication",
+        # "rest_framework.authentication.TokenAuthentication",
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
+}
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=300),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=2),
+    # "SLIDING_TOKEN_LIFETIME": timedelta(minutes=30),
+    # "SLIDING_TOKEN_REFRESH_LIFETIME": timedelta(days=1),
+    "AUTH_HEADER_TYPES": ("JWT"),
+}
+
+DJOSER = {
+    "USER_CREATE_PASSWORD_RETYPE": True,
+}
+
+DJOSER = {
+    "PASSWORD_RESET_CONFIRM_URL": "#/password/reset/confirm/{uid}/{token}",
+    "USERNAME_RESET_CONFIRM_URL": "#/username/reset/confirm/{uid}/{token}",
+    "ACTIVATION_URL": "#/activate/{uid}/{token}",
+    "SEND_ACTIVATION_EMAIL": False,
+    "SERIALIZERS": {
+        "activation": "djoser.serializers.ActivationSerializer",
+        "password_reset": "djoser.serializers.SendEmailResetSerializer",
+        "password_reset_confirm": "djoser.serializers.PasswordResetConfirmSerializer",
+        "password_reset_confirm_retype": "djoser.serializers.PasswordResetConfirmRetypeSerializer",
+        "set_password": "djoser.serializers.SetPasswordSerializer",
+        "set_password_retype": "djoser.serializers.SetPasswordRetypeSerializer",
+        "set_username": "djoser.serializers.SetUsernameSerializer",
+        "set_username_retype": "djoser.serializers.SetUsernameRetypeSerializer",
+        "username_reset": "djoser.serializers.SendEmailResetSerializer",
+        "username_reset_confirm": "djoser.serializers.UsernameResetConfirmSerializer",
+        "username_reset_confirm_retype": "djoser.serializers.UsernameResetConfirmRetypeSerializer",
+        "user_create": "djoser.serializers.UserCreateSerializer",
+        "user_create_password_retype": "djoser.serializers.UserCreatePasswordRetypeSerializer",
+        "user_delete": "djoser.serializers.UserDeleteSerializer",
+        "user": "djoser.serializers.UserSerializer",
+        "current_user": "djoser.serializers.UserSerializer",
+        "token": "djoser.serializers.TokenSerializer",
+        "token_create": "djoser.serializers.TokenCreateSerializer",
+    },
 }
