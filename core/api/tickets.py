@@ -19,6 +19,7 @@ from core.serializers import (
     TicketSerializer,
     TicketUpdateSerializer,
 )
+from core.services import TicketsCRUD
 
 
 class TicketsListCreateAPI(ListCreateAPIView):
@@ -83,6 +84,29 @@ class TicketAssignAPI(UpdateAPIView):
 
     def get_queryset(self):
         return Ticket.objects.filter(operator=None)
+
+
+class TicketResolveAPI(UpdateAPIView):
+    """Doing the change in Resolved mark"""
+
+    http_method_names = ["patch"]
+    permission_classes = [OperatorOnly]
+    serializer_class = TicketLightSerializer
+    lookup_field = "id"
+    lookup_url_kwarg = "id"
+
+    def get_queryset(self):
+        user = self.request.user
+        return Ticket.objects.filter(operator=user)
+
+    def update(self, request, *args, **kwargs):
+        instance = self.get_object()
+        instance = TicketsCRUD.change_resolved_status(instance)
+
+        # serializer = self.serializer_class(instance)
+        serializer = self.get_serializer(instance)
+
+        return Response(serializer.data)
 
 
 # '''Update - PUT, PATCH'''
