@@ -7,7 +7,7 @@ from .models import Comment, Ticket
 
 @admin.register(Ticket)
 class TicketAdmin(admin.ModelAdmin):
-    list_display = ["id", "theme", "operator", "client", "created_at"]
+    list_display = ["id", "theme", "operator", "client", "created_at", "resolved"]
     list_display_links = ["theme"]
     list_filter = ["operator"]
 

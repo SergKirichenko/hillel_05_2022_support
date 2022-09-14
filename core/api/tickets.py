@@ -46,7 +46,7 @@ class TicketsListCreateAPI(ListCreateAPIView):
         #     and  tickets without operator.
         queryset = self.get_queryset()
         serializer = TicketLightSerializer(queryset, many=True)
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
         #  User - Role = admin can't create the ticket

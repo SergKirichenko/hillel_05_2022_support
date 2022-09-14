@@ -8,9 +8,10 @@ COMMENT_TYPE = TypeVar("COMMENT_TYPE", Comment, None)
 
 
 class CommentSerializer(serializers.ModelSerializer):
+    text = serializers.CharField()
+    prev_comment = serializers.IntegerField(read_only=True, allow_null=True)
     # ticket = serializers.PrimaryKeyRelatedField(read_only=True)
     # user = serializers.PrimaryKeyRelatedField(read_only=True)
-    # prev_comment = serializers.IntegerField(read_only=True, allow_null=True)
 
     class Meta:
         model = Comment

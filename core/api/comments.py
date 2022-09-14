@@ -21,6 +21,7 @@ class CommentsListAPI(ListAPIView):
 
 
 class CommentsCreateAPI(CreateAPIView):
+
     http_method_names = ["post"]
     serializer_class = CommentSerializer
     lookup_field = "ticket_id"

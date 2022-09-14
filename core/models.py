@@ -61,8 +61,11 @@ class Comment(TimeStampMixin):
         return str(self.ticket)
 
     def save(self, *args, **kwargs):
-        if self.prev_comment.id == self.pk:
+        if self.prev_comment is None:
+            return super().save(*args, **kwargs)
+        elif self.prev_comment.id == self.pk:
             raise ValueError("Current comment can not be Prev comment.")
+
         if self.reply_to and self.reply_to.id == self.pk:
             raise ValueError("You can not reply on a current commen.")
 
