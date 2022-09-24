@@ -14,6 +14,6 @@ class TicketAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ["id", "ticket"]
+    list_display = ["id", "ticket", "user"]
     list_display_links = ["ticket"]
     list_filter = ["ticket"]

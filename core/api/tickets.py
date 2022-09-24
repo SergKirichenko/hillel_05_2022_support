@@ -29,27 +29,29 @@ class TicketsListCreateAPI(ListCreateAPIView):
     def get_queryset(self):
         """Filtering tickets according params"""
         user = self.request.user
-        params = self.request.query_params["empty"]
+
         if user.role.id == DEFAULT_ROLES["admin"]:
-            if params == "True":
+            empty = self.request.query_params["empty"]
+            if empty == "True":
                 return Ticket.objects.filter(operator=None)
-            elif params == "False":
+            elif empty == "False":
                 return Ticket.objects.filter(Q(operator=None) | Q(operator=user))
             raise ValidationError
         if user.role.id == DEFAULT_ROLES["user"]:
             return Ticket.objects.filter(client=user)
 
     def list(self, request, *args, **kwargs):
-        #    Get all user Ticket:
-        #     - If User = Role - user, he get his own tickets;
-        #     - If User = Role - admin, he get his own tickets(where he is signed like - operator),
-        #     and  tickets without operator.
+        # NOTE: Get all user Ticket:
+        #      - If User = Role-user, he get his own tickets;
+        #      - If User = Role-admin, he get his own tickets(where he is signed like - operator),
+        #        and  tickets without operator.
+
         queryset = self.get_queryset()
         serializer = TicketLightSerializer(queryset, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def create(self, request, *args, **kwargs):
-        #  User - Role = admin can't create the ticket
+        # NOTE: If User Role=admin, you can't create the ticket
 
         if self.permission.has_permission(self, request=request):
             serializer = self.get_serializer(data=request.data)
@@ -59,8 +61,9 @@ class TicketsListCreateAPI(ListCreateAPIView):
         raise PermissionDenied
 
 
-# '''GET (one ticket)'''
+# '''GET '''
 class TicketRetrieveAPI(RetrieveAPIView):
+    # NOTE: View one ticket
     serializer_class = TicketSerializer
     lookup_field = "id"
     lookup_url_kwarg = "id"
@@ -74,7 +77,7 @@ class TicketRetrieveAPI(RetrieveAPIView):
 
 # ''' PATCH'''
 class TicketAssignAPI(UpdateAPIView):
-    """if User = role - admin, he assign "no-operator" ticket for self"""
+    """if User_role=admin, he assign "no-operator" ticket for self"""
 
     http_method_names = ["patch"]
     serializer_class = TicketAssignSerializer
@@ -109,9 +112,9 @@ class TicketResolveAPI(UpdateAPIView):
         return Response(serializer.data)
 
 
-# '''Update - PUT, PATCH'''
+# '''PUT, PATCH'''
 class TicketsUpdateAPI(UpdateAPIView):
-    """only client can update own tickets,  two fields (theme, discription)"""
+    """only client can update own tickets, in two fields (theme, discription)"""
 
     serializer_class = TicketUpdateSerializer
     permission_classes = [ClientOnly]
@@ -125,7 +128,7 @@ class TicketsUpdateAPI(UpdateAPIView):
 
 # '''DELETE'''
 class TicketsDeleteAPI(RetrieveDestroyAPIView):
-    # Allow delete on specific procedure (description in permissions.py)
+    # NOTE: Allow delete on specific procedure (description in permissions.py)
     serializer_class = TicketSerializer
     permission_classes = [PermissionTicketDelete]
     lookup_field = "id"

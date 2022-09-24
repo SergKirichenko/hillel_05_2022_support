@@ -55,7 +55,13 @@ class Comment(TimeStampMixin):
         blank=True,
         related_name="next",
     )
-    reply_to = models.ForeignKey("self", on_delete=models.SET_NULL, null=True, blank=True, related_name="answers")
+    reply_to = models.ForeignKey(
+        "self",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="answers",
+    )
 
     def __str__(self) -> str:
         return str(self.ticket)
@@ -72,6 +78,7 @@ class Comment(TimeStampMixin):
         return super().save(*args, **kwargs)
 
 
+##########################################################################################
 # Ticket.objects.get(id=4)
 # Ticket.objects.all()
 # Ticket.objects.filter(client=User(...))
