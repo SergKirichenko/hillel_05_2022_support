@@ -1,5 +1,5 @@
 from django.db import migrations
-from authentication.services import create_dev_user
+from apps.authentication.services import create_dev_user
 
 
 class Migration(migrations.Migration):

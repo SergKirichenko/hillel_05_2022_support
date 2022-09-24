@@ -1,5 +1,5 @@
 
-import authentication.models
+import apps.authentication.models
 from django.db import migrations, models
 import django.db.models.deletion
 
@@ -71,7 +71,7 @@ class Migration(migrations.Migration):
                 'verbose_name_plural': 'Users',
             },
             managers=[
-                ('objects', authentication.models.CustomUserManager()),
+                ('objects', apps.authentication.models.CustomUserManager()),
             ],
         ),
     ]

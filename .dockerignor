@@ -1,0 +1,12 @@
+.reqveum/
+.idea/
+.vscode/
+.pre-commit-config.yaml
+*.md
+db.sqlite3
+
+# MacOS stuff
+.DS_Store
+
+# Python stuff
+# __pycache__/

@@ -2,7 +2,8 @@ from typing import Optional
 
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin, UserManager
 from django.db import models
-from shared.django import TimeStampMixin
+
+from apps.shared.django import TimeStampMixin
 
 DEFAULT_ROLES = {
     "admin": 1,
