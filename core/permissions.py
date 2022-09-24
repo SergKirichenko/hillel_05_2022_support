@@ -1,6 +1,30 @@
 from rest_framework.permissions import BasePermission
 
 from authentication.models import DEFAULT_ROLES
+from core.models import Comment, Ticket
+
+
+class OwnerTicketPermissions(BasePermission):
+    # NOTE: Only user(client) created this ticket or Operater assigned this ticket, can watch comments.
+    def has_permission(self, request, view):
+        ticket_id: int = view.kwargs["ticket_id"]
+        ticket = Ticket.objects.get(id=ticket_id)
+        ticket_users = [ticket.operator, ticket.client]
+        if request.user in ticket_users:
+            return True
+
+        return False
+
+
+class OwnerCommentPermissions(BasePermission):
+    # NOTE: Only owner of comment can manadge them.
+    def has_permission(self, request, view):
+        comment_id: int = view.kwargs["comment_id"]
+        comment = Comment.objects.get(id=comment_id)
+        if request.user == comment.user:
+            return True
+
+        return False
 
 
 class OperatorOnly(BasePermission):
@@ -20,7 +44,7 @@ class ClientOnly(BasePermission):
 
 
 class PermissionTicketDelete(BasePermission):
-    # Note: Permission allows user's to delete tickets, before oparator taken it.
+    # NOTE: Permission allows user's to delete tickets, before oparator taken it.
     #       And allow admin's to delete tickets after them resolved is True.
     def has_object_permission(self, request, view, obj):
         user_role = request.user.role.id
