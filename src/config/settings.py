@@ -3,6 +3,10 @@ from datetime import timedelta
 from distutils.util import strtobool
 from pathlib import Path
 
+from dotenv import load_dotenv
+
+load_dotenv(Path(".env"))
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
@@ -72,24 +76,24 @@ WSGI_APPLICATION = "config.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    }
-}
-
-# # Postgres
 # DATABASES = {
 #     "default": {
-#         "ENGINE": "django.db.backends.postgresql",
-#         "NAME": os.getenv("POSTGRES_DB", default="support"),
-#         "USER": os.getenv("POSTGRES_USER", default="support"),
-#         "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="support"),
-#         "HOST": os.getenv("POSTGRES_HOST", default="postgres"),
-#         "PORT": int(os.getenv("POSTGRES_PORT", default="5432")),
+#         "ENGINE": "django.db.backends.sqlite3",
+#         "NAME": BASE_DIR / "db.sqlite3",
 #     }
 # }
+
+# Postgres
+DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.postgresql",
+        "NAME": os.getenv("POSTGRES_DB", default="support"),
+        "USER": os.getenv("POSTGRES_USER", default="support"),
+        "PASSWORD": os.getenv("POSTGRES_PASSWORD", default="support"),
+        "HOST": os.getenv("POSTGRES_HOST", default="postgres"),
+        "PORT": int(os.getenv("POSTGRES_PORT", default="5432")),
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators

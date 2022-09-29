@@ -14,7 +14,7 @@ COPY ./ ./
 
 # Install deps
 RUN pip install pipenv \
-    && pipenv install --system --deploy --ignore-pipfile $PIPENV_EXTRA_ARG
+    && pipenv install --system --deploy --ignore-pipfile --dev 
 
 CMD sleep 3 \
     && python src/manage.py migrate \

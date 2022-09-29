@@ -24,6 +24,28 @@ $ pipenv shell   # activate vitual environment
 ```
 $ pipenv install   # installs all packages from Pipfile.
 ```
+
+## Mandatory steps
+
+### Create `.env` file
+```bash
+cp .env.default .env
+```
+
+## Run application with docker
+```bash
+docker build -t support_django .
+docker run -p 8000:80 -v $PWD:/app/ --rm -it support_django
+```
+'''PowerShell
+docker run -p 8000:80 -v ${PWD}:/app/ --rm -it support_django
+'''
+
+## Run application with docker-compose
+```bash
+docker-compose build
+docker-compose up -d
+```
 ___
 ## Description 
 #### Config 

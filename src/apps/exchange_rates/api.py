@@ -3,12 +3,16 @@ from __future__ import annotations
 import json
 import os
 from dataclasses import asdict, dataclass
+from pathlib import Path
 from typing import Dict, List
 
 import requests
 from django.http import JsonResponse
+from dotenv import load_dotenv
 
-PATH_TO_HISTORY_FILE = os.path.join("./history.json")
+load_dotenv(Path(".env"))
+
+PATH_TO_HISTORY_FILE = os.path.join("./src/history.json")
 
 
 @dataclass
