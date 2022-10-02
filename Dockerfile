@@ -1,3 +1,4 @@
+
 FROM python:3.8-slim
 
 # Receive build arguments
@@ -14,7 +15,9 @@ COPY ./ ./
 
 # Install deps
 RUN pip install pipenv \
-    && pipenv install --system --deploy --ignore-pipfile --dev 
+    && pipenv sync \
+    && pipenv install --system --deploy --ignore-pipfile ${PIPENV_EXTRA_ARGS} 
+    
 
 CMD sleep 3 \
     && python src/manage.py migrate \
