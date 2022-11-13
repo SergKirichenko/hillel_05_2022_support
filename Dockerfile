@@ -14,7 +14,7 @@ COPY ./ ./
 
 
 # Install deps
-RUN pip install --update pip \
+RUN pip install --upgrade pip \
     pip install pipenv \
     && pipenv sync \
     && pipenv install --system --deploy --ignore-pipfile ${PIPENV_EXTRA_ARGS} 
