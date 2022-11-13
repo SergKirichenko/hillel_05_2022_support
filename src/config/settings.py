@@ -26,11 +26,14 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "django_extensions",
+    
     "rest_framework",
     "rest_framework.authtoken",
     "djoser",
 ]
+
+SPEC_APPS = (["django_extensions"] if DEBUG else [])
+    
 
 LOCAL_APPS = [
     "apps.core",
@@ -40,7 +43,7 @@ LOCAL_APPS = [
 
 SITE_ID = 1
 
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS + SPEC_APPS
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
