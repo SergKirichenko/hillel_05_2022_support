@@ -26,12 +26,12 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-    "django_extensions"
+    "django_extensions",
     "rest_framework",
     "rest_framework.authtoken",
     "djoser",
 ]
-  
+
 
 LOCAL_APPS = [
     "apps.core",
