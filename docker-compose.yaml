@@ -21,6 +21,8 @@ services:
     env_file: ".env"
     depends_on:
       - postgres
+    links:
+      - "postgres:5432"
     ports:
       - "8000:80"
     volumes:

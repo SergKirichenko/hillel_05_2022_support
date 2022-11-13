@@ -6,7 +6,7 @@
 db.sqlite3
 
 # MacOS stuff
-.DS_Store
+#.DS_Store
 
 # Python stuff
 # __pycache__/
